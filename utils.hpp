@@ -9,7 +9,7 @@ class Generator
 {
 public:
     std::uniform_real_distribution<float> rx, ry, rz;
-    Generator(float maxX, float maxY, float maxZ) : rx(-maxX, maxX), ry(-maxY, maxY), rz(1.0f, maxZ) {}
+    Generator(float maxX, float maxY, float maxZ) : rx(-maxX, maxX - 1), ry(-maxY, maxY - 1), rz(1.0f, maxZ - 1) {}
     std::vector<Star> initStars(int n)
     {
         std::vector<Star> stars;
@@ -19,7 +19,4 @@ public:
         return stars;
     }
 };
-float map(float x, float imin, float imax, float omin, float omax)
-{
-    return (x - imin) * (omax - omin) / (imin - imax) + omin;
-}
+float map(float val, float iMin, float iMax, float oMin, float oMax) { return (val - iMin) * (oMax - oMin) / (iMax - iMin) + oMin; }

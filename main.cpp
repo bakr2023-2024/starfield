@@ -34,7 +34,7 @@ int main()
             float py = (star.y / pz) * sh + ty;
             float sx = (star.x / star.z) * sw + tx;
             float sy = (star.y / star.z) * sh + ty;
-            float brightness = map(star.z, 1.0f, sw, 255.0f, 10.0f) / 255.0f;
+            float brightness = map(star.z, 0, sw, 255, 20) / 255.0f;
             Color color{(unsigned char)(starColor.r * brightness),
                         (unsigned char)(starColor.r * brightness),
                         (unsigned char)(starColor.r * brightness),
