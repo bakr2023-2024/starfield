@@ -27,14 +27,30 @@ int main(int argc, char **argv)
     SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     InitWindow(0, 0, "Starfield");
     SetTargetFPS(fps);
+    InitAudioDevice();
+    Music music = LoadMusicStream("./let-it-happen.mp3");
+    float volume = 0.5f;
+    PlayMusicStream(music);
     int sw = GetScreenWidth(), sh = GetScreenHeight();
     Generator gen(sw, sh, sw);
     float speed = fps;
     float dt = 1.0f / fps;
     std::vector<Star> stars = gen.initStars(starsCount);
     float tx = sw / 2.0f, ty = sh / 2.0f;
+
     while (!WindowShouldClose())
     {
+        UpdateMusicStream(music);
+        if (IsKeyPressed(KEY_UP))
+        {
+            volume = volume > 1.0f ? 1.0f : volume + 0.1f;
+            SetMusicVolume(music, volume);
+        }
+        if (IsKeyPressed(KEY_DOWN))
+        {
+            volume = volume < 0.0f ? 0.0f : volume - 0.1f;
+            SetMusicVolume(music, volume);
+        }
         speed += GetMouseWheelMove() * fps;
         BeginDrawing();
         ClearBackground(spaceColor);
@@ -62,6 +78,8 @@ int main(int argc, char **argv)
         }
         EndDrawing();
     }
+    UnloadMusicStream(music);
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 }
