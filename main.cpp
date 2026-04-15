@@ -28,13 +28,18 @@ int main()
                 star.x = gen.rx(rng);
                 star.y = gen.ry(rng);
                 star.z = gen.rz(rng);
-                pz = star.z;
+                continue;
             }
             float px = (star.x / pz) * sw + tx;
             float py = (star.y / pz) * sh + ty;
             float sx = (star.x / star.z) * sw + tx;
             float sy = (star.y / star.z) * sh + ty;
-            DrawLine(px, py, sx, sy, starColor);
+            float brightness = map(star.z, 1.0f, sw, 255.0f, 10.0f) / 255.0f;
+            Color color{(unsigned char)(starColor.r * brightness),
+                        (unsigned char)(starColor.r * brightness),
+                        (unsigned char)(starColor.r * brightness),
+                        starColor.a};
+            DrawLine(px, py, sx, sy, color);
         }
         EndDrawing();
     }
