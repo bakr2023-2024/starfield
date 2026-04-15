@@ -19,3 +19,7 @@ public:
         return stars;
     }
 };
+float map(float x, float imin, float imax, float omin, float omax)
+{
+    return (x - imin) * (omax - omin) / (imin - imax) + omin;
+}

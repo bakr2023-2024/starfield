@@ -2,6 +2,8 @@
 #include "utils.hpp"
 int n = 18000;
 int fps = 90;
+Color spaceColor = BLACK;
+Color starColor = WHITE;
 int main()
 {
     SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
@@ -16,7 +18,7 @@ int main()
     {
         speed += GetMouseWheelMove() * fps;
         BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(spaceColor);
         for (auto &star : stars)
         {
             float pz = star.z;
@@ -32,7 +34,7 @@ int main()
             float py = (star.y / pz) * sh + ty;
             float sx = (star.x / star.z) * sw + tx;
             float sy = (star.y / star.z) * sh + ty;
-            DrawLine(px, py, sx, sy, WHITE);
+            DrawLine(px, py, sx, sy, starColor);
         }
         EndDrawing();
     }
