@@ -21,7 +21,7 @@ int main()
         {
             float pz = star.z;
             star.z -= speed * GetFrameTime();
-            if (star.z < 1.0f)
+            if (star.z < 1.0f || star.z > sw)
             {
                 star.x = gen.rx(rng);
                 star.y = gen.ry(rng);
