@@ -1,7 +1,7 @@
 #include <raylib.h>
 #include "utils.hpp"
-int n = 10000;
-int fps = 60;
+int n = 18000;
+int fps = 90;
 int main()
 {
     SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
@@ -14,6 +14,7 @@ int main()
     float tx = sw / 2.0f, ty = sh / 2.0f;
     while (!WindowShouldClose())
     {
+        speed += GetMouseWheelMove() * fps;
         BeginDrawing();
         ClearBackground(BLACK);
         for (auto &star : stars)
