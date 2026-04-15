@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     SetTargetFPS(fps);
     int sw = GetScreenWidth(), sh = GetScreenHeight();
     Generator gen(sw, sh, sw);
-    float speed = 100.0f;
+    float speed = fps;
     float dt = 1.0f / fps;
     std::vector<Star> stars = gen.initStars(starsCount);
     float tx = sw / 2.0f, ty = sh / 2.0f;
