@@ -9,7 +9,7 @@ class Generator
 {
 public:
     std::uniform_real_distribution<float> rx, ry, rz;
-    Generator(float maxX, float maxY, float maxZ) : rx(-maxX, maxX - 1), ry(-maxY, maxY - 1), rz(1.0f, maxZ - 1) {}
+    Generator(float maxX, float maxY, float maxZ) : rx(-maxX, maxX), ry(-maxY, maxY), rz(1.0f, maxZ) {}
     std::vector<Star> initStars(int n)
     {
         std::vector<Star> stars;
