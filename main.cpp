@@ -26,7 +26,9 @@ int main(int argc, char **argv)
         starsCount = std::stoi(argv[1]);
     SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     InitWindow(0, 0, "Starfield");
+    SetTraceLogLevel(LOG_NONE);
     SetTargetFPS(fps);
+    DisableCursor();
     InitAudioDevice();
     Music music = LoadMusicStream("./let-it-happen.mp3");
     float volume = 0.5f;
@@ -37,18 +39,17 @@ int main(int argc, char **argv)
     float dt = 1.0f / fps;
     std::vector<Star> stars = gen.initStars(starsCount);
     float tx = sw / 2.0f, ty = sh / 2.0f;
-
     while (!WindowShouldClose())
     {
         UpdateMusicStream(music);
         if (IsKeyPressed(KEY_UP))
         {
-            volume = volume > 1.0f ? 1.0f : volume + 0.1f;
+            volume = std::min(volume + 0.1f, 1.0f);
             SetMusicVolume(music, volume);
         }
         if (IsKeyPressed(KEY_DOWN))
         {
-            volume = volume < 0.0f ? 0.0f : volume - 0.1f;
+            volume = std::max(volume - 0.1f, 0.0f);
             SetMusicVolume(music, volume);
         }
         speed += GetMouseWheelMove() * fps;
